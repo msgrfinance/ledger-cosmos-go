@@ -14,7 +14,7 @@
 *  limitations under the License.
 ********************************************************************************/
 
-package ledger_terra_go
+package ledger_msgrc_go
 
 import (
 	"crypto/sha256"
@@ -54,7 +54,7 @@ func Test_UserGetVersion(t *testing.T) {
 
 	version := userApp.version
 
-	if userApp.appName == "Terra" {
+	if userApp.appName == "Msgrc" {
 		assert.Equal(t, uint8(0x0), version.AppMode, "TESTING MODE ENABLED!!")
 		assert.Equal(t, uint8(0x1), version.Major, "Wrong Major version")
 		assert.Equal(t, uint8(0x0), version.Minor, "Wrong Minor version")
@@ -105,7 +105,7 @@ func Test_GetAddressPubKeySECP256K1_Zero(t *testing.T) {
 
 	userApp.api.Logging = true
 
-	hrp := "terra"
+	hrp := "msgrc"
 	path := []uint32{44, 330, 0, 0, 0}
 
 	pubKey, addr, err := userApp.GetAddressPubKeySECP256K1(path, hrp)
@@ -119,7 +119,7 @@ func Test_GetAddressPubKeySECP256K1_Zero(t *testing.T) {
 	assert.Equal(t, 33, len(pubKey), "Public key has wrong length: %x, expected length: %x\n", pubKey, 65)
 
 	assert.Equal(t, "03028f0d5a9fd41600191cdefdea05e77a68dfbce286241c0190805b9346667d07", hex.EncodeToString(pubKey), "Unexpected pubkey")
-	assert.Equal(t, "terra1uayrf8zh44620zyjd052gdcjcrvjpgkkg78fux", addr, "Unexpected addr")
+	assert.Equal(t, "msgrc1uayrf8zh44620zyjd052gdcjcrvjpgkkg78fux", addr, "Unexpected addr")
 }
 
 func Test_GetAddressPubKeySECP256K1(t *testing.T) {
@@ -131,7 +131,7 @@ func Test_GetAddressPubKeySECP256K1(t *testing.T) {
 
 	userApp.api.Logging = true
 
-	hrp := "terra"
+	hrp := "msgrc"
 	path := []uint32{44, 330, 5, 0, 21}
 
 	pubKey, addr, err := userApp.GetAddressPubKeySECP256K1(path, hrp)
@@ -145,7 +145,7 @@ func Test_GetAddressPubKeySECP256K1(t *testing.T) {
 	assert.Equal(t, 33, len(pubKey), "Public key has wrong length: %x, expected length: %x\n", pubKey, 65)
 
 	assert.Equal(t, "038c2eead695e4f8e9318b8cbb6dc8b7321cbee92bb88230a3e3c3d91b8de859c0", hex.EncodeToString(pubKey), "Unexpected pubkey")
-	assert.Equal(t, "terra1ql0ggyut5pkytffp94q3xv5zzwezq2cwv5qxc0", addr, "Unexpected addr")
+	assert.Equal(t, "msgrc1ql0ggyut5pkytffp94q3xv5zzwezq2cwv5qxc0", addr, "Unexpected addr")
 }
 
 func Test_UserPK_HDPaths(t *testing.T) {

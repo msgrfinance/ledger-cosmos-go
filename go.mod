@@ -1,4 +1,4 @@
-module github.com/terra-money/ledger-terra-go
+module github.com/msgrfinance/ledger_msgrc_go
 
 go 1.12
 

@@ -14,7 +14,7 @@
 *  limitations under the License.
 ********************************************************************************/
 
-package ledger_terra_go
+package ledger_msgrc_go
 
 import (
 	"fmt"
@@ -54,7 +54,7 @@ func FindLedgerCosmosUserApp() (*LedgerCosmos, error) {
 	if err != nil {
 		defer ledgerAPI.Close()
 		if err.Error() == "[APDU_CODE_CLA_NOT_SUPPORTED] Class not supported" {
-			return nil, fmt.Errorf("are you sure the Terra or Cosmos app is open?")
+			return nil, fmt.Errorf("are you sure the Msgrc or Cosmos app is open?")
 		}
 		return nil, err
 	}
@@ -63,7 +63,7 @@ func FindLedgerCosmosUserApp() (*LedgerCosmos, error) {
 	if err != nil {
 		defer ledgerAPI.Close()
 		if err.Error() == "[APDU_CODE_CLA_NOT_SUPPORTED] Class not supported" {
-			return nil, fmt.Errorf("are you sure the Terra or Cosmos app is open?")
+			return nil, fmt.Errorf("are you sure the Msgrc or Cosmos app is open?")
 		}
 		return nil, err
 	}
@@ -86,7 +86,7 @@ func (ledger *LedgerCosmos) Close() error {
 func (ledger *LedgerCosmos) CheckVersion() error {
 	ver := ledger.version
 	appName := ledger.appName
-	if appName == "Terra" {
+	if appName == "Msgrc" {
 		return CheckVersion(ver, VersionInfo{0, 1, 0, 0})
 	} else if appName == "Cosmos" {
 		return CheckVersion(ver, VersionInfo{0, 2, 1, 0})
@@ -145,7 +145,7 @@ func (ledger *LedgerCosmos) SignSECP256K1(bip32Path []uint32, transaction []byte
 // GetPublicKeySECP256K1 retrieves the public key for the corresponding bip32 derivation path (compressed)
 // this command DOES NOT require user confirmation in the device
 func (ledger *LedgerCosmos) GetPublicKeySECP256K1(bip32Path []uint32) ([]byte, error) {
-	pubkey, _, err := ledger.getAddressPubKeySECP256K1(bip32Path, "terra", false)
+	pubkey, _, err := ledger.getAddressPubKeySECP256K1(bip32Path, "msgrc", false)
 	return pubkey, err
 }
 
@@ -164,7 +164,7 @@ func (ledger *LedgerCosmos) GetBip32bytes(bip32Path []uint32, hardenCount int) (
 	var pathBytes []byte
 	var err error
 
-	if (ledger.appName == "Terra" && ledger.version.Major == 1) ||
+	if (ledger.appName == "Msgrc" && ledger.version.Major == 1) ||
 		(ledger.appName == "Cosmos" && ledger.version.Major == 2) {
 		pathBytes, err = GetBip32bytesv2(bip32Path, 3)
 		if err != nil {
