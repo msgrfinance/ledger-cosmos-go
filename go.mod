@@ -1,4 +1,4 @@
-module github.com/msgrfinance/ledger_msgrc_go
+module github.com/msgrfinance/ledger-msgrc-go
 
 go 1.12
 
